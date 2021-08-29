@@ -15,9 +15,24 @@ function App() {
 
     const filteredValues = value.filter(todo => todo.id !== Number(id));
     setValue(filteredValues); 
-  }
+  };
 
-  console.log(value);
+  const handleCheckedValue = (evt) => {
+    const {id} = evt.target.dataset;
+
+    const foundValue = value.find((todos) => todos.id === Number(id));
+
+    foundValue.IsCompleted = !foundValue.IsCompleted;
+
+    if(foundValue.IsCompleted === true) {
+      evt.target.classList.add('color-red');
+    }
+    else {
+      evt.target.classList.remove('color-red');
+    }
+
+    console.log(foundValue);
+  }; //here
 
 
   return (
@@ -26,15 +41,12 @@ function App() {
     <input className="input" placeholder="Type here..." type="text" onKeyUp={(evt) =>{
       if(evt.code === 'Enter') {
         const newValue = {
-          id: value[value.length-1].id +1 || 0,
+          id: value[value.length-1]?.id +1 || 0,
           title: evt.target.value.trim(),
           IsCompleted: false,
         };
 
         setValue([...value, newValue])
-
-        console.log(newValue);
-
         evt.target.value = null;
       }
     }} />
@@ -42,7 +54,7 @@ function App() {
     <ul className='todos-list'>
       {
         value.length > 0 && value.map(todo => {
-            return <Todo key={todo.id} todo={todo} removeValue={handleRemoveValue} />;
+            return <Todo key={todo.id} todo={todo} removeValue={handleRemoveValue} checkedValue={handleCheckedValue} />;
         }
         )
       }
