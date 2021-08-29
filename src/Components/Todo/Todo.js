@@ -1,3 +1,5 @@
+import './Todo.scss';
+
 function Todo ({todo, removeValue, checkedValue}) {
 
     return <li className='todos-item'>
