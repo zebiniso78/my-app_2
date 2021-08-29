@@ -25,10 +25,10 @@ function App() {
     foundValue.IsCompleted = !foundValue.IsCompleted;
 
     if(foundValue.IsCompleted === true) {
-      evt.target.classList.add('color-red');
+      evt.target.nextElementSibling.classList.add('color-red');
     }
     else {
-      evt.target.classList.remove('color-red');
+      evt.target.nextElementSibling.classList.remove('color-red');
     }
 
     console.log(foundValue);
